@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+</head>
+<body>
+    <h1>Enter login and password:</h1>
+    <form id="loginForm">
+        <input type="text" id="login" placeholder="Login..." required>
+        <input type="password" id="password" placeholder="Password..." required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Предотвращаем стандартное поведение формы
+
+            const login = document.getElementById('login').value;
+            const password = document.getElementById('password').value;
+
+            // Здесь можно объединить данные в объект
+            const userData = {
+                users: [{ login, password }]
+            };
+
+            console.log(JSON.stringify(userData, null, 4)); // Печатаем в консоль для проверки
+            alert('Данные сохранены в консоли!');
+        });
+    </script>
+</body>
+</html>
