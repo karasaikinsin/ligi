@@ -15,21 +15,26 @@
     <button id="devModeBtn">Dev Mode</button>
 
     <script>
+        // Получаем и инициализируем базу данных
+        let database = JSON.parse(localStorage.getItem('database')) || { users: [] };
+
         document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault(); // Предотвращаем стандартное поведение формы
 
             const login = document.getElementById('login').value;
             const password = document.getElementById('password').value;
 
-            // Создаем объект с данными
-            const database = {
-                users: [{ login, password }]
-            };
+            // Добавляем нового пользователя в базу данных
+            database.users.push({ login, password });
 
-            // Сохраняем данные в localStorage
+            // Сохраняем обновленную базу данных в localStorage
             localStorage.setItem('database', JSON.stringify(database));
 
+            console.log('Данные о пользователе добавлены:', { login, password });
             alert('Данные сохранены!');
+
+            // Отправляем событие о новой записи
+            window.dispatchEvent(new Event('storage'));
         });
 
         document.getElementById('devModeBtn').addEventListener('click', function () {
