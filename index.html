@@ -22,27 +22,14 @@
             const password = document.getElementById('password').value;
 
             // Создаем объект с данными
-            const userData = {
+            const database = {
                 users: [{ login, password }]
             };
 
-            // Преобразуем объект в строку JSON
-            const jsonString = JSON.stringify(userData, null, 4);
+            // Сохраняем данные в localStorage
+            localStorage.setItem('database', JSON.stringify(database));
 
-            // Создаем Blob из строки
-            const blob = new Blob([jsonString], { type: 'application/json' });
-
-            // Создаем ссылку для скачивания
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'logins.json';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url); // Освобождаем URL
-
-            alert('Файл logins.json сохранен!');
+            alert('Данные сохранены!');
         });
 
         document.getElementById('devModeBtn').addEventListener('click', function () {
