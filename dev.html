@@ -10,14 +10,27 @@
     <pre id="jsonInfo"></pre>
 
     <script>
-        // Получаем данные из localStorage
-        const database = localStorage.getItem('database');
-        if (database) {
-            // Отображаем JSON данные
-            document.getElementById('jsonInfo').textContent = database;
-        } else {
-            document.getElementById('jsonInfo').textContent = 'Нет доступных данных.';
+        function displayDatabase() {
+            // Получаем данные из localStorage
+            const database = JSON.parse(localStorage.getItem('database'));
+            if (database && database.users.length > 0) {
+                // Отображаем полную базу данных пользователей
+                document.getElementById('jsonInfo').textContent = JSON.stringify(database, null, 4);
+            } else {
+                document.getElementById('jsonInfo').textContent = 'Нет доступных пользователей.';
+            }
         }
+
+        // Отображаем базу данных при загрузке страницы
+        displayDatabase();
+
+        // Добавляем слушатель на событие изменения в localStorage
+        window.addEventListener('storage', function(event) {
+            // Проверяем, если произошло изменение в ключе 'database'
+            if (event.key === 'database') {
+                displayDatabase(); // Обновляем отображение
+            }
+        });
     </script>
 </body>
 </html>
