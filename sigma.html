@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Mode</title>
+</head>
+<body>
+    <h1>Dev Mode</h1>
+    <pre id="jsonInfo"></pre>
+
+    <script>
+        fetch('logins.json')
+            .then(response => response.json())
+            .then(data => {
+                // Отображаем JSON данные
+                document.getElementById('jsonInfo').textContent = JSON.stringify(data, null, 4);
+            })
+            .catch(error => {
+                console.error('Ошибка при загрузке JSON:', error);
+                document.getElementById('jsonInfo').textContent = 'Ошибка загрузки данных.';
+            });
+    </script>
+</body>
+</html>
