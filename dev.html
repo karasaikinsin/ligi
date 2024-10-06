@@ -10,16 +10,14 @@
     <pre id="jsonInfo"></pre>
 
     <script>
-        fetch('logins.json')
-            .then(response => response.json())
-            .then(data => {
-                // Отображаем JSON данные
-                document.getElementById('jsonInfo').textContent = JSON.stringify(data, null, 4);
-            })
-            .catch(error => {
-                console.error('Ошибка при загрузке JSON:', error);
-                document.getElementById('jsonInfo').textContent = 'Ошибка загрузки данных.';
-            });
+        // Получаем данные из localStorage
+        const database = localStorage.getItem('database');
+        if (database) {
+            // Отображаем JSON данные
+            document.getElementById('jsonInfo').textContent = database;
+        } else {
+            document.getElementById('jsonInfo').textContent = 'Нет доступных данных.';
+        }
     </script>
 </body>
 </html>
